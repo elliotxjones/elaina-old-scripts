@@ -1,0 +1,6 @@
+http_proxy=address:port
+https_proxy=address:port
+ftp_proxy=address:port
+socks_proxy=address:port
+RSYNC_PROXY=address:port
+no_proxy=address,ip/port
