@@ -1,0 +1,21 @@
+[http "https://github.com"]
+	proxy = address:port
+[http "https://gitlab.com"]
+	proxy = address:port
+[user]
+	email =
+	name =
+	signingkey =
+[credential "https://github.com"]
+	helper = 
+[core]
+	editor = vim
+[alias]
+    lg = log --color --graph --pretty=format:'%C(yellow)%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+    co = checkout
+    s=status
+    b=branch
+[commit]
+	gpgsign = true
+[safe]
+
