@@ -1,8 +1,30 @@
 #! /bin/bash
+#
+#
+# NAME
+#       qcd - quickly cd
+# 
+# SYNOPSIS
+#       qcd [OPTION] SHORTCUT
+#
+# DESCRIPTION
+#       Bash utility for saving directory paths for corresponding 
+#       directory shortcut names. The directory shortcut names are 
+#       used in place of the full paths for a more convenient method 
+#       of navigating to frequently used directories.
+#
+#       -h      print help and exit
+#       -a      add shortcut for current dir
+#       -d	    delete shortcut
+#
+# AUTHOR
+#       Written by Elliot Jones
+
 
 quick_cd() {
     declare args=($@);
-    declare data_file=~/bin/qcd/qcd.dat
+    declare data_file=~/bin/qcd/qcd.dat;
+    mkdir -p ~/bin/qcd/;
  
     # Sources cd_shortcuts
     load_data_file() {
@@ -56,6 +78,7 @@ quick_cd() {
         if [ "${cd_shortcuts["$shortcut"]}" == "" ]; then
             cd_shortcuts["$shortcut"]=$PWD;
             write_data_file;
+            echo "Added $shortcut";
         else
             echo "Shortcut already exists";
         fi
@@ -67,6 +90,7 @@ quick_cd() {
         if [ "${cd_shortcuts["$shortcut"]}" != "" ]; then
             unset cd_shortcuts["$shortcut"];
             write_data_file;
+            echo "Deleted $shortcut";
         else
             echo "No such shortcut";
         fi
@@ -94,7 +118,7 @@ quick_cd() {
     
 
     # Loads cd_shortcuts
-    load_data_file
+    load_data_file;
     # No args
     if [ ${#args[@]} -eq 0 ]; then
         print_shortcuts;
@@ -110,7 +134,7 @@ quick_cd() {
         echo "No such shortcut";
     # Invalid dir
     elif ! [ -d "${cd_shortcuts["${args[0]}"]}" ]; then
-        echo "No such directory";
+        echo "Directory moved or missing";
     # If you got this far, then you are highly talented
     else
         echo "Invalid option";
